@@ -2,7 +2,7 @@
 
 
 ’‘’第一步‘’‘
-在dailyfresh下创建一个包celery_tasks
+在dailyfresh下创建一个包celery_tasks 再建一个tasks.py
 
 #使用celery
 from celery import Celery
@@ -27,7 +27,7 @@ def send_register_active_email(to_email,username,token):
 
 
 
-’‘’第二步‘’‘
+’‘’第二步‘’‘views.py中
 from celery_tasks.tasks import send_register_active_email
 
 send_register_active_email.delay(email,username,token)#用delay 放在任务队列

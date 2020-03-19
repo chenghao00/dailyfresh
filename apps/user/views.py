@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from apps.user.models import User,Address
+from apps.goods.models import GoodsSKU
+
 import re
 from django.views import View
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer #导入加密方式
@@ -15,7 +17,7 @@ from django.contrib.auth import authenticate,login,logout #authenticate进行登
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
+from django_redis import get_redis_connection #django-redis 提供了方法建立新的原生连接
 
 
 # Create your views here.
@@ -210,13 +212,37 @@ class UserInfoView(LoginRequiredMixin,View):#使用LoginRequiredMixin 如果未�
         #django本身会给request对象添加一个属性request.user
         #如果用户登陆 user是User类的实例，下面的方法返回ture，
         #如果未登陆，user是AnonymousUser类的一个实例，方法返回false
-        #request.user.is_authenticated()
+        #request.user.is_authenticated
         #除了给模版文件传递的变量{}以外，django框架会把request.user也传给模板文件
 
         #获取用户的个人信息
+        user=request.user
+        address = Address.objects.get_default_address(user)
 
         #获取用户的历史浏览记录
-        return render(request,'user_center_info.html',{'page':'user'})
+        #链接数据库
+        #from redis import Redis  # 将用户浏览记录存于redis缓存中
+        #sr=Redis(host='localhost', port=6379, decode_responses=True,db=9)
+
+        con = get_redis_connection("default") #con是一个实例对象<redis.client.StrictRedis object at 0x2dc4510>
+
+        history_key='history_%d'%user.id
+        #获取用户最新浏览的商品的id
+        sku_ids=con.lrange(history_key,0,4)
+
+        #从数据库中查询用户浏览的5个商品的具体信息
+        goods_li=GoodsSKU.objects.filter(id__in=sku_ids)
+
+        #遍历获取
+        goods_res=[]
+        for a_id in sku_ids:
+            for goods in goods_li:
+                if a_id == goods.id:
+                    goods_res.append(goods)
+
+        #组织上下文
+        context={'page':'user','address':address,'goods_li':goods_res}
+        return render(request,'user_center_info.html',context)
 
 #/user/order
 class UserOrderView(LoginRequiredMixin,View):
@@ -259,7 +285,7 @@ class AddressView(LoginRequiredMixin,View):
         #如果用户已存在默认收货地址，添加地址不为默认地址，否则未默认地址
         #获取登陆用户的User对象
         user=request.user
-        
+
         # try:
         #     address=Address.objects.get(user=user,is_default=True)
         # except Address.DoesNotExist:

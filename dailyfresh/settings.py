@@ -117,8 +117,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/aaa/'  #隐藏真实路径
+STATIC_URL = '/static/'  #隐藏真实路径
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+#默认的设置上传文件的保存目录
+MEDIA_URL='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 # 富文本编辑器配置
 TINYMCE_DEFAULT_CONFIG = {
@@ -137,7 +141,7 @@ EMAIL_HOST_PASSWORD = "cncjkdqqzmvvbdfe"    # 授权码
 EMAIL_USE_TLS= True
 EMAIL_FROM = "django<1037277923@qq.com>"            # 邮箱地址
 
-#缓存
+#缓存 django-redis
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -153,4 +157,15 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 
-LOGIN_URL='/user/login/' #设置LoginRequiredMixin拒绝行为返回的url
+LOGIN_URL='/user/login/' #设置LoginRequiredMixin拒绝行为返回的url  # /accounts/login?next=/user
+
+
+# 设置Django的文件存储类
+DEFAULT_FILE_STORAGE='utils.fdfs.storage.FDFSStorage'
+
+# 【自定义的名称】设置fdfs使用的client.conf文件路径 为了进行动态配置
+FDFS_CLIENT_CONF='./utils/fdfs/client.conf'
+
+# 【自定义的名称】设置fdfs存储服务器上nginx的IP和端口号 为了进行动态配置
+FDFS_URL='http://172.16.179.131:8888/'
+

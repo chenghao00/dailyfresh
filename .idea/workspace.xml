@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8237aec5-5bff-4b6f-a21a-cd6747db5f5d" name="Default" comment="" />
+    <list default="true" id="8237aec5-5bff-4b6f-a21a-cd6747db5f5d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/goods/migrations/0002_auto_20200319_1727.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dailyfresh.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/fdfs/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/fdfs/client.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/fdfs/storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/goods/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/goods/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/goods/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celery_tasks/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/celery_tasks/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dailyfresh/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/dailyfresh/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_center_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_center_info.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,31 +43,40 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Z74BfAW4EuQKYpmDSGoTbTxTW9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils/fdfs" />
+      <recent name="$PROJECT_DIR$/apps" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/apps/cart" />
       <recent name="$PROJECT_DIR$/apps/goods" />
       <recent name="$PROJECT_DIR$/apps/order" />
-      <recent name="$PROJECT_DIR$/apps/user" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/apps" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -67,6 +96,9 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <method />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/dailyfresh/static/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="dailyfresh" />
@@ -113,6 +145,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -141,7 +178,10 @@
       <workItem from="1584265580528" duration="91000" />
       <workItem from="1584265733910" duration="14004000" />
       <workItem from="1584333147401" duration="29333000" />
-      <workItem from="1584442336195" duration="7457000" />
+      <workItem from="1584442336195" duration="8065000" />
+      <workItem from="1584454706210" duration="63000" />
+      <workItem from="1584456757279" duration="1299000" />
+      <workItem from="1584513294836" duration="22226000" />
     </task>
     <servers />
   </component>
@@ -156,7 +196,14 @@
       <collection />
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="479" y="138" key="#Inspections" timestamp="1584610558772">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="479" y="138" key="#Inspections/0.23.1440.877@0.23.1440.877" timestamp="1584610558772" />
     <state x="476" y="214" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584411537673">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -165,9 +212,20 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="347" y="59" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1584176678751" />
-    <state x="212" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1584442336178">
+    <state x="212" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1584454706512">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="212" y="253" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1584442336178" />
+    <state x="212" y="253" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1584454706512" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/goods/models.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
