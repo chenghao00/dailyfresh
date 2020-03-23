@@ -1,10 +1,13 @@
 from django.core.files.storage import Storage
 from django.conf import settings
-#from fdfs_client.client import Fdfs_client
+
+
+# from fdfs_client.client import Fdfs_client
 
 
 class FDFSStorage(Storage):
     '''fast dfs文件存储类'''
+
     def __init__(self, client_conf=None, base_url=None):
         '''初始化'''
         if client_conf is None:
@@ -54,7 +57,4 @@ class FDFSStorage(Storage):
 
     def url(self, name):
         '''返回访问文件的url路径'''
-        return self.base_url+name
-
-
-
+        return self.base_url + name

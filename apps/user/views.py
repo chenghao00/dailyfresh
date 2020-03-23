@@ -233,15 +233,20 @@ class UserInfoView(LoginRequiredMixin,View):#使用LoginRequiredMixin 如果未�
         #从数据库中查询用户浏览的5个商品的具体信息
         goods_li=GoodsSKU.objects.filter(id__in=sku_ids)
 
-        #遍历获取
-        goods_res=[]
-        for a_id in sku_ids:
-            for goods in goods_li:
-                if a_id == goods.id:
-                    goods_res.append(goods)
+        # #遍历获取
+        # goods_res=[]
+        # for a_id in sku_ids:
+        #     for goods in goods_li:
+        #         if a_id == goods.id:
+        #             goods_res.append(goods)
+        # 遍历获取用户浏览的商品信息
+        goods_li = []
+        for id in sku_ids:
+            goods = GoodsSKU.objects.get(id=id)
+            goods_li.append(goods)
 
         #组织上下文
-        context={'page':'user','address':address,'goods_li':goods_res}
+        context={'page':'user','address':address,'goods_li':goods_li}
         return render(request,'user_center_info.html',context)
 
 #/user/order
