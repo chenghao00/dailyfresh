@@ -16,7 +16,7 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#就不用在前面写apps
+# 就不用在前面写apps
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
@@ -28,8 +28,7 @@ SECRET_KEY = 'bga5t#n-a9=mx^glxprkc#16c#z*n_t%o8jiwh(y*i+h7c!xo$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*',]
-
+ALLOWED_HOSTS = ['*', ]
 
 # Application definition
 
@@ -40,11 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce', # 富文本编辑器
-    'apps.user', # 用户模块
-    'apps.goods', # 商品模块
-    'apps.cart', # 购物车模块
-    'apps.order', # 订单模块
+    'tinymce',  # 富文本编辑器
+    'haystack',  # 全文检索框架
+    'apps.user',  # 用户模块
+    'apps.goods',  # 商品模块
+    'apps.cart',  # 购物车模块
+    'apps.order',  # 订单模块
 )
 
 MIDDLEWARE = [
@@ -77,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -88,17 +87,17 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'cheng97731',
         'HOST': 'localhost',
-        'PORT':'3306',
+        'PORT': '3306',
         'OPTIONS': {
-                        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-                      },
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
 
     }
 }
 
 # django认证系统使用的模型类
-AUTH_USER_MODEL='user.User'
-#不自动关联数据库的is_active,解决认证系统authenticate方法中,login的返回全是None的问题
+AUTH_USER_MODEL = 'user.User'
+# 不自动关联数据库的is_active,解决认证系统authenticate方法中,login的返回全是None的问题
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -113,15 +112,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'  #隐藏真实路径
+STATIC_URL = '/static/'  # 隐藏真实路径
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-#默认的设置上传文件的保存目录
-MEDIA_URL='/media/'
+# 默认的设置上传文件的保存目录
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 # 富文本编辑器配置
@@ -131,17 +129,16 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
-
-#邮箱
+# 邮箱
 EMAIL_HOST = "smtp.qq.com"  # SMTP服务器主机，这个不用改
-EMAIL_PORT = 587             # 端口，千万要写587端口，否则容易出错
+EMAIL_PORT = 587  # 端口，千万要写587端口，否则容易出错
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = "1037277923@qq.com"       # 发邮件的邮箱地址
-EMAIL_HOST_PASSWORD = "cncjkdqqzmvvbdfe"    # 授权码
-EMAIL_USE_TLS= True
-EMAIL_FROM = "django<1037277923@qq.com>"            # 邮箱地址
+EMAIL_HOST_USER = "1037277923@qq.com"  # 发邮件的邮箱地址
+EMAIL_HOST_PASSWORD = "cncjkdqqzmvvbdfe"  # 授权码
+EMAIL_USE_TLS = True
+EMAIL_FROM = "django<1037277923@qq.com>"  # 邮箱地址
 
-#缓存 django-redis
+# 缓存 django-redis
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -151,21 +148,31 @@ CACHES = {
         }
     }
 }
-
-#session
+# session
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
-
-LOGIN_URL='/user/login/' #设置LoginRequiredMixin拒绝行为返回的url  # /accounts/login?next=/user
-
+LOGIN_URL = '/user/login/'  # 设置LoginRequiredMixin拒绝行为返回的url  # /accounts/login?next=/user
 
 # 设置Django的文件存储类
-DEFAULT_FILE_STORAGE='utils.fdfs.storage.FDFSStorage'
-
+DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 # 【自定义的名称】设置fdfs使用的client.conf文件路径 为了进行动态配置
-FDFS_CLIENT_CONF='./utils/fdfs/client.conf'
-
+FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
 # 【自定义的名称】设置fdfs存储服务器上nginx的IP和端口号 为了进行动态配置
-FDFS_URL='http://172.16.179.131:8888/'
+FDFS_URL = 'http://172.16.179.131:8888/'
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        # 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',  #原始文件不用，需要改变分词方式
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',  # 将jieba分词ChineseAnalyzer()导入
+        # 索引文件路径
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+#控制每页显示数量
+HAYSTACK_SEARCH_RESULTS_PER_PAGE=1
