@@ -140,6 +140,7 @@ EMAIL_FROM = "django<1037277923@qq.com>"  # 邮箱地址
 
 # 缓存 django-redis
 CACHES = {
+    #get_redis_connection('default')
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/9",
