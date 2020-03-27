@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # 2) 传递参数: 商品id(sku_id) 商品数量(count)
 
 # /cart/add
-# ajax发起的请求都在后台，在浏览器中看不到效果，
+# ajax发起的请求都在后台，在浏览器中看不到效果，所以用user.is_authenticated验证登陆
 class CartAddView(View):
     '''购物车记录添加'''
 
