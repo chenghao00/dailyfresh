@@ -11,7 +11,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     # path('', login_required(UserInfoView.as_view()), name='user'),  未使用Mixin
     path('', UserInfoView.as_view(), name='user'),  # 使用Mixin
-    path('order/', UserOrderView.as_view(), name='order'),
+    re_path('order/(?P<page>\d+)/', UserOrderView.as_view(), name='order'),
     path('address/', AddressView.as_view(), name='address'),
     path('logout/', LogoutView.as_view(), name='logout')
 

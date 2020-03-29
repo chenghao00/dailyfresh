@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from apps.user.models import User,Address
 from apps.goods.models import GoodsSKU
+from apps.order.models import OrderInfo,OrderGoods
+from django.core.paginator import Paginator
 
 import re
 from django.views import View
@@ -249,13 +251,68 @@ class UserInfoView(LoginRequiredMixin,View):#使用LoginRequiredMixin 如果未�
         context={'page':'user','address':address,'goods_li':goods_li}
         return render(request,'user_center_info.html',context)
 
-#/user/order
+#/user/order/1
 class UserOrderView(LoginRequiredMixin,View):
     '''用户中心-订单页'''
-    def get(self,request):
+    def get(self,request,page):
         #获取用户的订单信息
+        user=request.user
+        orders=OrderInfo.objects.filter(user=user).order_by('-create_time') #新提交的在前面
 
-        return render(request,'user_center_order.html',{'page':'order'})
+        #遍历获取订单商品的信息
+        for order in orders:
+            order_skus=OrderGoods.objects.filter(order_id=order.order_id)
+
+            #遍历order_skus计算商品小计
+            for order_sku in order_skus:
+                #计算小计:
+                amount=order_sku.count*order_sku.price
+                #动态给order_sku增加amount属性，保存订单商品的小计
+                order_sku.amount= amount
+
+            #动态给order增加属性,保存订单状态的标题
+            order.status_name=OrderInfo.ORDER_STATUS[order.order_status]
+            #动态给order增加属性，保存订单商品的信息
+            order.order_skus=order_skus
+
+
+        #分页
+        paginator=Paginator(orders,1)
+
+        #处理页码
+
+        # 获取第page页的内容
+        try:
+            page = int(page)
+        except Exception as e:
+            page = 1
+        if page > paginator.num_pages:
+            page = 1
+
+        # 获取第page页的Page实例对象
+        order_page = paginator.page(page)
+        # 进行页码的控制
+        num_pages = paginator.num_pages
+        # 1、小于5显示全部
+        if num_pages < 5:
+            pages = range(1, num_pages + 1)
+        # 当前页是前三页，显示1-5
+        elif page <= 3:
+            pages = range(1, 6)
+        # 当前页是最后三页，显示最后5页
+        elif num_pages - page <= 2:
+            pages = range(num_pages - 4, num_pages + 1)
+        else:
+            pages = range(page - 2, page - 3)
+
+        #组织上下文
+        context={'order_page':order_page,
+                 'pages':pages,
+                 'page': 'order'
+                 }
+
+        #使用模板
+        return render(request,'user_center_order.html',context)
 
 #/user/address
 class AddressView(LoginRequiredMixin,View):
