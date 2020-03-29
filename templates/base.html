@@ -17,7 +17,7 @@
 {% block header_con %}
     <div class="header_con">
         <div class="header">
-            <div class="welcome fl">欢迎来到天天生鲜!</div>
+            <div class="welcome fl">欢迎来到国关生鲜!</div>
             <div class="fr">
                 {% if user.is_authenticated %}
                     <div class="login_btn fl">
@@ -48,7 +48,8 @@
 {# 网页顶部搜索框块 #}
 {% block search_bar %}
     <div class="search_bar clearfix">
-        <a href="index.html" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>
+{#        <a href="index.html" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>#}
+        <a href="{% url 'goods:index' %}" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>
         <div class="search_con fl">
             <form method="get" action="/search/">
                 <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
@@ -56,7 +57,7 @@
             </form>
         </div>
         <div class="guest_cart fr">
-            <a href="#" class="cart_name fl">我的购物车</a>
+            <a href="{% url 'cart:show' %}" class="cart_name fl">我的购物车</a>
             <div class="goods_count fl" id="show_count">{{ cart_count }}</div>
         </div>
     </div>
@@ -67,16 +68,20 @@
 
 <div class="footer">
     <div class="foot_link">
-        <a href="#">关于我们</a>
+        <a href="https://www.uir.cn/c/2015-11-20/521453.shtml">学校概览</a>
         <span>|</span>
-        <a href="#">联系我们</a>
+        <a href="https://waiyuxueyuan.uir.cn/">院系设置</a>
         <span>|</span>
-        <a href="#">招聘人才</a>
+        <a href="https://www.uir.cn/c/2015-11-20/521473.shtml">教育教学</a>
         <span>|</span>
-        <a href="#">友情链接</a>
+        <a href="https://xiaoyou.uir.cn/">校友服务</a>
+        <span>|</span>
+        <a href="http://sjxx.uir.cn/">书记信箱</a>
+        <span>|</span>
+        <a href="http://xzxx.uir.cn/">校长信箱</a>
     </div>
-    <p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
-    <p>电话：010-****888 京ICP备*******8号</p>
+    <p>CopyRight © 国际关系学院研究生部 All Rights Reserved</p>
+    <p>电话：010-******* 京ICP备1******2号</p>
 </div>
 {# 网页底部html元素块 #}
 {% block bottom %}{% endblock bottom %}

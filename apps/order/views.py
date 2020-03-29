@@ -290,7 +290,7 @@ class OrderPayView(View):
         order_string = alipay.api_alipay_trade_page_pay(
             out_trade_no=order_id,  # 订单id
             total_amount=str(total_pay),  # 支付总金额
-            subject='天天生鲜%s' % order_id,
+            subject='国关生鲜%s' % order_id,
             return_url=None,
             notify_url=None  # 可选, 不填则使用默认notify url
         )
